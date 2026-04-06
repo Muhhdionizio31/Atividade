@@ -46,4 +46,20 @@ def cadrastar_medicos():
             print(f"Ocorreu um erro {erro}")
 
 
+def criar_consulta():
+    tipo_consulta = input("Digite o tipo da consulta: ").strip().capitalize()
+    horario_consulta = input("Qual o horario deseja marcar: ")
+    data_consulta = input("Qual a data deseja marcar: ")
+
+    with Session() as session:
+        try:
+            consultas = Consulta(tipo=tipo_consulta)
+            horarios = Consulta( horario=horario_consulta)
+            data = Consulta(data=data_consulta)
+            session.add(Consulta)
+            session.commit()
+            print(f"Consulta cadrastado com sucesso")
+        except Exception as erro:
+            session.rollback()
+            print(f"Ocorreu um erro {erro}")
 
